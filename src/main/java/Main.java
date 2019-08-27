@@ -17,9 +17,8 @@ import java.util.TreeSet;
 public class Main {
     private static String dataFile = "src/main/resources/map.json";
     private static Scanner scanner;
-    private static final Logger logger = LogManager.getLogger();
-    //static int x =5;
-    //static int y =0;
+    private static final Logger logger = LogManager.getLogger(Main.class);
+
     private static StationIndex stationIndex;
 
     public static void main(String[] args) {
@@ -30,7 +29,7 @@ public class Main {
         scanner = new Scanner(System.in);
         for (; ; ) {
             try {
-                //System.out.println(x/y);
+
                 Station from = takeStation("Введите станцию отправления:");
                 Station to = takeStation("Введите станцию назначения:");
 
