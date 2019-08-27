@@ -30,18 +30,20 @@ public class Main {
         scanner = new Scanner(System.in);
         for (; ; ) {
             try {
+                //System.out.println(x/y);
                 Station from = takeStation("Введите станцию отправления:");
                 Station to = takeStation("Введите станцию назначения:");
+
 
                 List<Station> route = calculator.getShortestRoute(from, to);
                 System.out.println("Маршрут:");
                 printRoute(route);
-                //System.out.println(x/y);
+
 
                 System.out.println("Длительность: " +
                         RouteCalculator.calculateDuration(route) + " минут");
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error(e);
                 e.printStackTrace();
             }
         }
