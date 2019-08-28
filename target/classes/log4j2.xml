@@ -8,21 +8,24 @@
 <File name="Error" fileName="logs/appError.log">
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
     <Filters>
-        <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL" />
+<!--        <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL" />-->
+        <MarkerFilter marker="ERRORS_HISTORY" />
     </Filters>
 </File>
 
 <File name="SearchedStations" fileName="logs/appSearchedStations.log">
-<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %logger{36} - %msg%n"/>
     <Filters>
-        <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />
+<!--        <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL" />-->
+        <MarkerFilter marker="INPUT_HISTORY" />
     </Filters>
 </File>
 
 <File name="MistakesInInputSearchedStations" fileName="logs/appMistakesInInputSearchedStations.log">
-<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %logger{36} - %msg%n"/>
     <Filters>
-        <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
+<!--        <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />-->
+        <MarkerFilter marker="INVALID_STATIONS" />
     </Filters>
 </File>
 
@@ -31,9 +34,9 @@
 <loggers>
 <root level="debug">
 <!--<appender-ref ref="Console" level="info"/>-->
-<appender-ref ref="Error" level="error"/>
-<appender-ref ref="SearchedStations" level="info"/>
-<appender-ref ref="MistakesInInputSearchedStations" level="warn"/>
+<appender-ref ref="Error" />
+<appender-ref ref="SearchedStations" />
+<appender-ref ref="MistakesInInputSearchedStations" />
 
 </root>
 </loggers>

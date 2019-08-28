@@ -2,6 +2,8 @@ import core.Line;
 import core.Station;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,7 +19,10 @@ import java.util.TreeSet;
 public class Main {
     private static String dataFile = "src/main/resources/map.json";
     private static Scanner scanner;
-    private static final Logger logger = LogManager.getLogger(Main.class);
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+    private static final Marker INPUT_HISTORY_MARKER = MarkerManager.getMarker("INPUT_HISTORY");
+    private static final Marker INVALID_STATIONS_MARKER = MarkerManager.getMarker("INVALID_STATIONS");
+    private static final Marker ERRORS_HISTORY_MARKER = MarkerManager.getMarker("ERRORS_HISTORY");
 
     private static StationIndex stationIndex;
 
@@ -42,7 +47,8 @@ public class Main {
                 System.out.println("Длительность: " +
                         RouteCalculator.calculateDuration(route) + " минут");
             } catch (Exception e) {
-                logger.error(e);
+                LOGGER.info(ERRORS_HISTORY_MARKER, "Произошла ошибка: {}", e );
+                //logger.error(e);
                 e.printStackTrace();
             }
         }
@@ -75,10 +81,13 @@ public class Main {
             String line = scanner.nextLine().trim();
             Station station = stationIndex.getStation(line);
             if (station != null) {
-                logger.info("Введена станция: "  + line);
+                //logger.info("Введена станция: "  + line);
+                LOGGER.info(INPUT_HISTORY_MARKER, "Введена станция: {}", station);
+
                 return station;
             }
-            logger.warn("Станция не найдена : "  + line);
+            //logger.warn("Станция не найдена : "  + line);
+            LOGGER.info(INVALID_STATIONS_MARKER, "Станция не найдена : {}", line);
             System.out.println("Станция не найдена :(");
 
         }
